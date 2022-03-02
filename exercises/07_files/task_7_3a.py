@@ -40,3 +40,17 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+table = []
+str_table = ''
+with open('CAM_table.txt') as file:
+    for string in file:
+        arr = string.split()
+        if arr and arr[0].isdigit():
+            vlan, mac, dyn, intf = arr
+            table.append([int(vlan), mac, intf])
+for vlan, mac, intf in sorted(table):
+    str_table += f'{vlan:<10}{mac:20}{intf}\n'
+
+str_table.rsplit()
+print(str_table)

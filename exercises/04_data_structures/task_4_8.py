@@ -26,3 +26,10 @@
 """
 
 ip = "192.168.3.1"
+new_ip = ip.split('.')
+upper_str = f'{new_ip[0]:<10}    {new_ip[1]:<10}    {new_ip[2]:<10}    {new_ip[3]:<10}'
+lower_str = '{:08b}      {:08b}      {:08b}      {:08b}'.format(int(new_ip[0]), int(new_ip[1]), int(new_ip[2]), int(new_ip[3]))
+result = f"""
+{upper_str} \n{lower_str}
+"""
+print(result)

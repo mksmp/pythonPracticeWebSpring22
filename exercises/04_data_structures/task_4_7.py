@@ -16,3 +16,7 @@
 """
 
 mac = "AAAA:BBBB:CCCC"
+mac_list = mac.split(':')
+new_mac = '{}{}{}'.format(mac_list[0], mac_list[1], mac_list[2])
+result = str(bin(int(new_mac, 16)))[2::]
+print(result)

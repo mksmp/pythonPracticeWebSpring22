@@ -14,3 +14,25 @@ Outbound Interface    FastEthernet0/0
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+def infoIp(ospf_route):
+    list1 = ospf_route.split()
+    result = {'Prefix': list1[1], 'AD/Metric': list1[2].strip('[]'), 'via': list1[3], 'Next-Hop': list1[4].strip(','),
+              'Last update': list1[5].strip(','), 'Outbound Interface': list1[6]}
+    template = """ 
+    Prefix              {} 
+    AD/Metric           {} 
+    Next-Hop            {} 
+    Last update         {} 
+    Outbound Interface  {} 
+    """
+    del result['via']
+    result_str = template.format(result['Prefix'], result['AD/Metric'],
+                                 result['Next-Hop'], result['Last update'], result['Outbound Interface'])
+    return result_str
+
+
+file = open('ospf.txt', 'r')
+for string in file:
+    print(infoIp(string))
+file.close()

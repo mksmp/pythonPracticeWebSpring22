@@ -17,3 +17,11 @@ Enter VLAN number: 10
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+num_vlan = input('Enter VLAN number: ')
+with open('CAM_table.txt') as file:
+    for string in file:
+        arr = string.split()
+        if arr and arr[0].isdigit() and arr[0] == num_vlan:
+            vlan, mac, dyn, intf = arr
+            print(f'{vlan:<10}{mac:20}{intf}')

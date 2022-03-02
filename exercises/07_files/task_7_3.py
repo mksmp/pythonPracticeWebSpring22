@@ -20,3 +20,10 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+with open('CAM_table.txt') as file:
+    for string in file:
+        arr = string.split()
+        if arr and arr[0].isdigit():
+            vlan, mac, dyn, intf = arr
+            print(f'{vlan:<10}{mac:20}{intf}')

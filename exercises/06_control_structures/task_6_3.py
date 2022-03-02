@@ -74,10 +74,27 @@ trunk = {
     "0/7": ["only", "30"],
 }
 
-# for intf, vlan in access.items():
-#     print("interface FastEthernet" + intf)
-#     for command in access_template:
-#         if command.endswith("access vlan"):
-#             print(f" {command} {vlan}")
-#         else:
-#             print(f" {command}")
+def makeVlans(vlans):
+    result = ''
+    for i in range(1, len(vlans)):
+        result += vlans[i] + ','
+    return result[:-1]
+
+
+for intf, vlans in trunk.items():
+    print("interface FastEthernet" + intf)
+    for command in trunk_template:
+        if command.endswith("allowed vlan"):
+            if vlans[0] == 'add':
+                vlan = makeVlans(vlans)
+                print(f" {command} {vlans[0]} {vlan}")
+            elif vlans[0] == 'only':
+                vlan = makeVlans(vlans)
+                print(f" {command} {vlan}")
+            elif vlans[0] == 'del':
+                vlan = makeVlans(vlans)
+                print(f" {command} remove {vlan}")
+        else:
+            print(f" {command}")
+
+

@@ -46,3 +46,9 @@ london_co = {
         "routing": True,
     },
 }
+
+
+device_name = input('Введите имя устройства: ')
+list_pars = ', '.join(sorted(london_co[device_name]))
+result = london_co[device_name]
+print(result)
