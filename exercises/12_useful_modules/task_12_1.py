@@ -17,3 +17,20 @@ IP-адрес считается доступным, если выполнени
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+
+import subprocess
+
+
+def ping_ip_addresses(ip_addresses):
+    reachable_ip = []
+    unreachable_ip = []
+
+    for ip in ip_addresses:
+        result = subprocess.run(
+            ["ping", ip], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
+        if result.returncode == 0:
+            reachable_ip.append(ip)
+        else:
+            unreachable_ip.append(ip)
+    return reachable_ip, unreachable_ip

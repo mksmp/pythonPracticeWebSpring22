@@ -43,6 +43,7 @@ def parse_cdp_neighbors(command_output):
     и с файлами и с выводом с оборудования.
     Плюс учимся работать с таким выводом.
     """
+    print(command_output)
 
 
 if __name__ == "__main__":
