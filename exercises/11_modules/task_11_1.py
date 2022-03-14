@@ -35,6 +35,7 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 """
 
 
+
 def parse_cdp_neighbors(command_output):
     """
     Тут мы передаем вывод команды одной строкой потому что именно в таком виде будет
@@ -43,7 +44,18 @@ def parse_cdp_neighbors(command_output):
     и с файлами и с выводом с оборудования.
     Плюс учимся работать с таким выводом.
     """
-    print(command_output)
+    result = {}
+    for line in command_output.split('\n'):
+        line = line.strip()
+        elems = line.split()
+        # print(elems)
+        if '>' in line:
+            hostname = elems[0].split('>')[0]
+        elif line and elems[3].isdigit():
+            device, l_intf, l_intf_num, *other, p_intf, p_intf_num = elems
+            result[(hostname, l_intf + l_intf_num)] = (device, p_intf + p_intf_num)
+    return result
+            
 
 
 if __name__ == "__main__":
