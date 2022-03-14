@@ -45,7 +45,7 @@ port_security_template = [
 access_config = {"FastEthernet0/12": 10, "FastEthernet0/14": 11, "FastEthernet0/16": 17}
 
 
-def generate_access_config(intf_vlan_mapping, access_template, portsecurity = None):
+def generate_access_config(intf_vlan_mapping, access_template, psecurity = None):
     access = []
     for intf, vlans in intf_vlan_mapping.items():
         access.append(f'interface {intf}')
@@ -54,10 +54,10 @@ def generate_access_config(intf_vlan_mapping, access_template, portsecurity = No
                 access.append(part + f' {vlans}')
             else:
                 access.append(part)
-        if portsecurity is not None:
-            access += portsecurity
+        if psecurity is not None:
+            access += psecurity
     return access
 
 
-print('Access: ', generate_access_config(access_config, access_mode_template))
-print('Security: ', generate_access_config(access_config, access_mode_template, port_security_template))
+# print('Access: ', generate_access_config(access_config, access_mode_template))
+# print('Security: ', generate_access_config(access_config, access_mode_template, port_security_template))

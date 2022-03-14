@@ -62,13 +62,15 @@ trunk_config_2 = {
 }
 
 
-def generate_trunk_config(intf_vlan_mapping, access_template):
+def generate_trunk_config(intf_vlan_mapping, trunk_template):
     access = []
     for intf, vlans in intf_vlan_mapping.items():
+        for vlan in vlans:
+            vlan = str(vlan)
         access.append(f'interface {intf}')
-        for part in access_template:
+        for part in trunk_template:
             if part.endswith('allowed vlan'):
-                access.append(part + f' {vlans}')
+                access.append(part + f' {",".join(map(str, vlans))}')
             else:
                 access.append(part)
     return access
